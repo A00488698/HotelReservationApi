@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+.venv
+.env
+.ebextensions
+db.sqlite3
+HotelReservationApi.zip
+.idea
