@@ -14,21 +14,21 @@ def confirmation_exists(confirmation):
         cursor.execute("SELECT 1 FROM reservations_reservation WHERE confirmation_number = %s LIMIT 1", [confirmation])
         return cursor.fetchone() is not None
 class Hotel(models.Model):
-    name = models.CharField(max_length=100, verbose_name="酒店名称", default="")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="价格", default=0.00)
-    available = models.BooleanField(default=True, verbose_name="可预订")
+    name = models.CharField(max_length=100, verbose_name="Hotel Name", default="")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price", default=0.00)
+    available = models.BooleanField(default=True, verbose_name="Available")
 
     def __str__(self):
         return self.name
 
 class Reservation(models.Model):
-    hotel_name = models.CharField(max_length=100, verbose_name="关联酒店", default="")
-    check_in = models.DateField(verbose_name="入住日期", default=timezone.now)
-    check_out = models.DateField(verbose_name="退房日期", default=timezone.now)
-    customer_name = models.CharField(max_length=100, verbose_name="预定者姓名", default="")
-    confirmation_number = models.CharField(max_length=20, unique=True, verbose_name="确认号", default="")
-    guests_list = models.JSONField(default=list, verbose_name="客人列表")  # 存储客人列表的JSON
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="总价", default=0.00)
+    hotel_name = models.CharField(max_length=100, verbose_name="Hotel Name", default="")
+    check_in = models.DateField(verbose_name="Check-in Date", default=timezone.now)
+    check_out = models.DateField(verbose_name="Check-out Date", default=timezone.now)
+    customer_name = models.CharField(max_length=100, verbose_name="Customer Name", default="")
+    confirmation_number = models.CharField(max_length=20, unique=True, verbose_name="Confirmation Number", default="")
+    guests_list = models.JSONField(default=list, verbose_name="Guest List")  # 存储客人列表的JSON
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Total Price", default=0.00)
 
     def __str__(self):
         return f"{self.customer_name} - {self.hotel_name}"
